@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			class Star{
+				constructor(uname){
+					this.uname=uname;
+				}
+			}
+			var star=new Star('刘德华');
+			var star1=new Star('zhuangxueyou');
+			console.log(star.uname);
+			console.log(star1.uname);
+			class Father{
+				constructor(x,y){
+					this.x=x;
+					this.y=y;
+				}
+				money(){
+					console.log(100);
+				}
+				sum(){
+					console.log(this.x+this.y);
+				}
+			}
+			class Son extends Father{
+				constructor(x,y){
+					/*this.x=x;
+					this.y=y;*/
+					super(x,y);//调用了父类的构造函数
+				}
+			}
+			var son=new Son(1,2);
+			son.money();
+			son.sum()
+		</script>
+	</body>
+</html>
