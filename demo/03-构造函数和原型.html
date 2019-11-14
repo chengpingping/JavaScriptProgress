@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var obj1=new Object();
+			var obj2={};
+			function Obj(uname,age){
+				this.uname=uname;
+				this.uage=age;
+			}
+			/*Obj.prototype.sing=function(){
+				console.log("sing a song");
+			}*/
+			Obj.prototype={
+				constructor: Obj,//指原来的构造函数
+				sing:function(){
+					console.log("sing a song");
+				},
+				movie:function(){
+					console.log("movie star")
+				}
+			}
+			Obj.sex='female';
+			var ldh=new Obj('ldh','50');
+			ldh.sing();
+			console.log(Obj.sex);//female
+			console.log(ldh.sex);//undefine
+			var zxy=new Obj('zxy','52');
+			console.log(ldh.sing()===zxy.sing());//true
+			console.dir(Obj);//prototype（原型）对象
+			console.log(ldh);
+			console.log(ldh.__proto__===Obj.prototype);//true
+			console.log(ldh.__proto__.constructor===Obj);//如果手动指回构造函数，结果true；否则为false
+			console.log(Obj.prototype);//Obj的原型对象
+			console.log(Obj.prototype.__proto__===Object.prototype);//true投入Obj的原型对象的对象原型指向的是Object的原型
+			console.log(Obj.prototype.__proto__.__proto__);//null,Object的原型对象上的对象原型是空
+			console.log(Object.prototype.__proto__);//null
+			console.log(Array.prototype);
+			//给数组增加求和函数
+			/*Array.prototype.sum=function(){
+				var sum=0;
+				for(var i=0;i<this.length;i++){
+					sum+=this[i];
+				}
+				return sum;
+			}*/
+			Array.prototype={
+				constructor:Array,
+				sum:function(){
+					var sum=0;
+					for(var i=0;i<this.length;i++){
+						sum+=this[i];
+					}
+					return sum;
+				}
+			}
+			var arr=[1,2,3];
+			console.log(arr.sum());
+		</script>
+	</body>
+</html>

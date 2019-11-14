@@ -5,13 +5,28 @@
 		<title></title>
 	</head>
 	<body>
+		<button>按钮</button>
 		<script>
+			var that;
+			/*var star=new Star('刘德华');*///报错
 			class Star{
 				constructor(uname){
 					this.uname=uname;
+					this.btn=document.querySelector("button");
+					this.btn.onclick=this.sing;
+					that=this;
+				}
+				sing(){
+					console.log(this);
+					console.log(that.uname);
+					/*console.log(this.uname);//this指向btn*/
+				}
+				dance(){
+					console.log(this);//这个this指向调用者
 				}
 			}
 			var star=new Star('刘德华');
+			star.dance();
 			var star1=new Star('zhuangxueyou');
 			console.log(star.uname);
 			console.log(star1.uname);
@@ -33,10 +48,14 @@
 					this.y=y;*/
 					super(x,y);//调用了父类的构造函数
 				}
+				subtract(){
+					console.log(this.x-this.y);
+				}
 			}
-			var son=new Son(1,2);
+			var son=new Son(10,2);
 			son.money();
-			son.sum()
+			son.sum();
+			son.subtract();
 		</script>
 	</body>
 </html>

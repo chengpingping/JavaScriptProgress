@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			ul{
+				list-style: none;
+			}
+			main{
+				margin: 100px auto;
+				width: 600px;
+				height: 400px;
+				background-color: #eee;
+				text-align: center;
+			}
+			main>h4{
+				height: 10%;
+			}
+			.tabsbox{
+				height: 90%;
+				background-color: #ddd;
+			}
+			.firstnav{
+				width: 100%;
+				height: 10%;
+				line-height: 40px;
+				background-color: #ccc;
+				display: flex;
+				cursor: pointer;
+			}
+			.firstnav>ul{
+				float: left;
+				flex: 19;
+				display: flex;
+			}
+			.firstnav>ul>li{
+				float: left;
+				flex: 1;
+				border-right: 1px solid #aaa;
+				position: relative;
+			}
+			.firstnav>ul>li>.iconfont{
+				position: absolute;
+				top: -12px;
+				right: 0px;
+				color: white;
+			}
+			.liactive{
+				background-color: darkred;
+				color: white;
+			}
+			.firstnav>.tabadd{
+				/*line-height: 40px;*/
+				float: right;
+				flex: 1;
+				background-color: #aaa;
+			}
+			.tabscon{
+				width: 100%;
+				height: 90%;
+				background-color: #bbb;
+				text-align: left;
+				position: relative;
+			}
+			.tabscon>section{
+				display: none;
+				position: absolute;
+			}
+			.tabscon>.conactive{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h4>
+				js 面向对象 动态添加标签页
+			</h4>
+			<div class="tabsbox" id="tab">
+				<nav class="firstnav">
+					<ul>
+						<li class="liactive"><span>测试1</span><span class="iconfont icon-cha"></span></li>
+						<li><span>测试2</span><span class="iconfont icon-cha"></span></li>
+						<li><span>测试3</span><span class="iconfont icon-cha"></span></li>
+					</ul>
+					<div class="tabadd">
+						<span>+</span>
+					</div>
+				</nav>
+				<!--tab的内容-->
+				<div class="tabscon">
+					<section class="conactive">测试1</section>
+					<section>测试2</section>
+					<section>测试3</section>
+				</div>
+			</div>
+		</main>
+		<script src="../js/tab.js"></script>
+		<script>
+		</script>
+	</body>
+</html>
