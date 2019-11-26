@@ -16,7 +16,7 @@
 			var o={
 				name:'lisa'
 			}
-			fn.call(o);
+			fn.call(o);//改变了this的指向
 			
 			/*父构造函数*/
 			function father(uname,age){
@@ -24,14 +24,26 @@
 				this.uname=uname;
 				this.age=age;
 			}
+			father.prototype.money=function(){
+				console.log("money");
+			}
 			/*子构造函数*/
 			function son(uname,age){
 				/*this指向子构造函数的对象实例*/
 				/*如果想要使用father中的属性和方法使用call*/
 				father.call(this,uname,age);//调用father构造函数，改变father中this的指向；
 			}
+			/*这样写会导致father中的原型对象也添加一个exam的函数，因为子原型对象在继承父原型的时候，只是将地址拷贝给了子原型对象。*/
+			//son.prototype=son.prototype;//继承父构造函数的原型
+			/*改进*/
+			son.prototype=new father;/*此时访问father的原型对象的函数，会沿着原型链去查找访问*/
+			son.prototype.constructor=son;/*如果没有加这一句，constructor会指向father*/
+			son.prototype.exam=function(){
+				console.log("exam");
+			}
 			var s=new son('xiaoming','20');
 			console.log(s);
+			console.log(son.prototype.constructor);
 		</script>
 		
 	</body>

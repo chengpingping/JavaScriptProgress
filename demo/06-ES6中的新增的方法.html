@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var arr=[1,2,3];
+			arr.forEach(function(currentValue,index){
+				console.log(currentValue);
+			})
+			var newarr=arr.filter(function(value,index){
+				return value>=2;
+			})
+			console.log(newarr);
+			var flag=arr.some(function(value){
+				return value===3;
+			})
+			console.log(flag);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			class Star{
+				
+			}
+			console.log(typeof Star);//function
+			console.log(Star.prototype);
+			Star.prototype.sing=function(){
+				console.log("sing");
+			}
+			var ldh=new Star();
+			console.log(ldh);
+		</script>
+	</body>
+</html>
