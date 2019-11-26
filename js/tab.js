@@ -89,7 +89,7 @@ class Tab{
 				this.blur();//手动调用失去焦点操作
 			}
 		}
-		console.log(str);
+		//console.log(str);
 	}
 }
 var tab=new Tab('#tab');
