@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+			var obj={
+                name:'linda',
+                age:20,
+                sex:'female'
+            };
+            Object.defineProperty(obj, 'friend',{
+                value:'lisa'
+            });
+            console.log(obj);
+             Object.defineProperty(obj, 'name',{
+                writable:false
+            });
+            obj.name='andy';
+
+            var arr=Object.keys(obj);
+            console.log(arr);
+
+            Object.defineProperty(obj, 'addr',{
+                value:'重庆',
+                writable: false,//不可以修改
+                enumerable: true,//可以被枚举
+                configurable:true//可以被删除，修改这个特性
+            })
+            delete obj.addr;
+            var arr=Object.keys(obj);
+            console.log(arr);
+
+    </script>
+</body>
+</html>

@@ -385,10 +385,293 @@ arr:数组对象本身；
 
 map()、every()与forEach()、filter()的用法一致；
 
+**forEach和some的区别**
+
+	forEach:会遍历数组中所有的元素，并且return也不会终止循环；
+	some:找到元素就直接终止循环，或者使用return也会终止循环；
+
 ### 字符串方法
 
+**trim()**
 
+去掉字符串两端的空白字符；
+
+	str.trim();
+
+可以去除字符串两端的字符；
+
+不会影响原来的字符串，返回一个新的字符串；
 
 ### 对象方法
+
+给对象新增属性；
+
+	object.defineProperty(obj,prop,descriptor);
+
+**Object.defineProperty(obj, prop, descriptor)**
+
+obj:目标对象；
+
+prop:新定义/修改的属性的名字；
+
+descriptor:目标属性所拥有的特性；
+
+**descriptor:以对象的形式{}书写,descriptor中的属性有**：
+
+    value:设置属性的值，默认：undefined；
+    writable:值是否可以重写，默认：false；
+    enumberable:目标属性是否可以被枚举，默认：false；
+    configurable:目标属性是否可以被删除或是否可以再次修改特性,默认：false;
+
+**Object.keys()**
+
+获取对象身上的所有属性：
+
+    Object.keys(obj);
+
+效果类似于`for...in...`；
+
+返回一个由属性名组成的数组；
+
+# 函数进阶
+
+## 函数的定义和调用
+
+### 函数定义的方式
+
+ - 函数声明方式function关键字（命名函数）
+ - 函数表达式（匿名函数）
+ - new Function()(构造函数)
+
+    function fn(){
+    };
+    var fn=function(){
+    };
+    var fn=new Function();
+
+**new Function('param1', 'param2', 'function');**
+
+调用：`fn()`；
+
+param:参数；
+
+function:函数体
+
+注意：参数必须用`''`括起来，包括函数体；
+
+这种方式效率较低，不方便书写，使用较少；
+
+所有函数都是Function的实例（对象）；
+
+函数（Function）也属于对象（Object）；
+
+**所有函数都是Function的实例（对象）**
+
+### 函数的调用
+
+ - 普通函数
+
+    fn();
+    fn.call();
+
+ - 对象方法
+
+    obj.fn();
+
+ - 绑定事件函数
+
+    btn.onclick=function(){};
+
+ - 构造函数
+
+    function object(){
+        fn(){}
+    }
+    var obj=new object();
+    obj.fn();
+
+ - 定时器
+
+    setInterval(function(){},1000);
+
+ - 立即执行函数,自动调用，调用的对象是window
+
+    (function fn(){})()
+
+## this
+
+### this的指向
+
+this的指向，是在我们调用函数的时候确定的。
+
+调用方式不同决定了this的指向不同；
+
+ - 普通函数
+
+    fn();//这种调用的方式，普通函数中的this指向的是window;
+
+ - 对象方法
+
+    obj.fn();//obj调用了fn(),对象方法中的this指向的是obj;
+
+ - 绑定事件函数
+
+    btn.onClick(function(){});//btn调用了函数，绑定事件函数中的this指向的是绑定事件的对象btn；
+
+ - 构造函数
+
+    function object(){}
+    obj.prototype.fn=function(){}
+    var obj=new object();//此时的this指向的是实例化的对象obj;(new的四个步骤)；构造函数中的原型对象中的this也是指向的obj;
+
+ - 定时器
+
+    window.setTimeout(function(){},1000);//this指向window
+
+ - 立即执行函数
+
+    (function(){})();//this指向window对象
+
+**一般情况下，this指向调用者**
+
+### 改变函数内部的this指向
+
+js中提供了一些函数方法处理函数内部this的指向问题，常用的有`bind()`、`call()`、`apply()`；
+
+**call()**
+
+call()方法可以调用函数，但是他可以改变函内部this的指向；
+
+    fn.call(thisArg,arg1,arg2,...);
+
+call的主要作用是实现**继承**，用于继承父类中的属性；
+
+**apply()**
+
+apply也是用于调用一个函数，也可以改变this的指向；
+
+    fn.apply(thisArg,[argsArray]);
+
+ - thisArg:在构造函数被调用时指定的`this`;
+ - argsArray:传递的值，必须包含在**数组**里面；
+ - 返回值：函数返回值
+
+apply的主要作用：
+
+我们可以利用apply借用Math.max()求出数组中的最大值；
+
+    Math.max.apply(null,arr);
+    Math.max.apply(Math,arr);
+
+**bind()**
+
+bind**不会调用函数**，但是可以改变函数内部this的指向；
+
+    fn.bind(thisArg,arg1,arg2,...);
+
+ - thisArg:在构造函数被调用时指定的`this`;
+ - arg:传递的其他的参数；
+ - 返回值：指定的this值和初始化参数改造的原函数拷贝（将原函数改造后的新函数）；
+
+bind的主要作用：
+
+如果有的函数我们不想立即调用，但是又想改变函数内部this的指向时；
+
+    //一个按钮点击后被禁用，但是3分钟后重新启用
+    btn.onclick=function(){
+        this.disabled=true;
+        setTimeout(function(){
+            //this.disabled=false;//定时器函数中的this指向window；
+            //定时器中函数不想立即被调用
+            this.disabled=false;//this的指向已经改变了，指向了btn；
+        }.bind(this)，1000);
+    }
+
+bind替换了that=this这种写法，节约了内存；
+
+对比[例子1](js/tab.js)和[例子2](js/tab1.js)；
+
+**call apply bind 总结**
+
+相同：
+
+    都可以改变this的指向；
+
+不同：
+
+    1.call和apply会调用函数，并且改变函数内部的this指向；
+    2.call和安排apply传递的参数不同，call传递参数以（arg1,arg2,...）,appl是以数组的形式[args]；
+    3.bind不会调用函数，也可以改变函数内部this 的指向；
+
+应用场景：
+
+    1.call主要用于继承；
+    2.apply与数组有关的实现，比如使用Math中的max函数求数组的最大值；
+    3.bind不调用函数，但是还想改变this的指向，比如改变定时器中的this指向；
+
+## 严格模式
+
+js分为：**严格模式**和非严格模式。
+
+严格模式（strict mode）是在ES5才提出的，之前的例子中采用的都是非严格模式；
+
+兼容性较差，IE10+才支持；
+
+严格模式采用具有限制性JavaScript变体的一种方式，在严格的条件下运行JS代码。
+
+### 严格模式的变化
+
+ - 消除了JavaScript的语法的不合理、不严谨之处，减少怪异行为；
+ - 消除了代码运行的一些不安全之处，保证代码的运行安全；
+ - 提高编译器效率，增加运行的速度；
+ - 禁用了在ECMAScript的未来版本中可能会定义的一些语法，为未来新版本的JavaScript做好铺垫。比如：保留字 class, enum, export, extends, import, super不能做变量名；
+
+### 开启严格模式
+
+**1.为脚本开启严格模式**
+
+    'use strict';
+
+可以再整个`<script></script>`标签中开启严格模式；
+
+    <script>
+        'use strict';
+    </script>
+
+也可以在立即执行函数中开启严格模式；
+
+    (function(){
+        'use strict';
+    })();
+
+在函数中开启严格模式：
+
+    function fn(){
+        'use strict';
+    }
+
+注意：ie10-没有严格模式；
+
+### 主要变化
+
+**1.变量规定**
+
+ - 在正常的模式中，如果一个变量没有**声明**就赋值，默认是全局变量。严格模式都必须先用var命令声明，然后再使用。
+ - 不能再严格模式下**随意删除**声明好的变量；
+ - 严格模式下全局作用域中函数中的this是undefined；
+
+
+## 高阶函数
+
+
+
+## 闭包
+
+
+
+## 递归
+
+
+
 
 

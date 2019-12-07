@@ -5,6 +5,8 @@
 		<title></title>
 	</head>
 	<body>
+		<input class="input" type="text" /><input class="btn" type="button" value="点击" />
+		<div></div>
 		<script>
 			var arr=[1,2,3];
 			arr.forEach(function(currentValue,index){
@@ -18,6 +20,31 @@
 				return value===3;
 			})
 			console.log(flag);
+			
+			var str='   ea    r    ';
+			console.log(str);
+			var str1=str.trim();
+			console.log(str1);
+			
+			var input=document.querySelector('.input');
+			var btn=document.querySelector('.btn');
+			var div=document.querySelector('div');
+			btn.addEventListener('click',function(){
+				var inValue=input.value;
+				console.log(inValue);
+				inValue=inValue.trim();
+				console.log(inValue);
+				div.innerHTML=inValue;
+				if(input.value.trim()==''){
+					alert("please input!")
+				}
+			})
+			/*新增属性*/
+			var obj={
+				id:1,
+				name:oppo,
+				price:1999
+			}
 		</script>
 	</body>
 </html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+		var o={
+            name:'andy'
+        }
+        function fn(){
+            console.log(this.name);
+        }
+        fn.call(o);
+        fn.apply(o);
+        var arr=[1,2,3,4];
+        //var max=Math.max.apply(null,arr);
+        var max=Math.max.apply(Math,arr);
+        console.log(max);
+        var fn1=fn.bind(o);
+        fn1();//this÷∏œÚ¡Ào
+    </script>
+</body>
+</html>

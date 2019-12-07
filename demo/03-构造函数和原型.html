@@ -15,6 +15,9 @@
 				this.uname=uname;
 				this.uage=age;
 			}
+			Obj.speak=function(){
+				console.log("speak");
+			};
 			/*Obj.prototype.sing=function(){
 				console.log("sing a song");
 			}*/
@@ -30,6 +33,7 @@
 			Obj.sex='female';
 			var ldh=new Obj('ldh','50');
 			ldh.sing();
+			Obj.speak();
 			console.log(Obj.sex);//female
 			console.log(ldh.sex);//undefine
 			var zxy=new Obj('zxy','52');
