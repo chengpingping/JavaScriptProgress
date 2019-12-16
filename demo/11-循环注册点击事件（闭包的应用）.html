@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul class="nav">
+			<li>榴莲</li>
+			<li>臭豆腐</li>
+			<li>鲱鱼罐头</li>
+			<li>大猪蹄子</li>
+		</ul>
+		<script>
+			var lis=document.querySelector('.nav').querySelectorAll('li');
+			for(var i=0;i<lis.length;i++){
+				lis[i].index=i;
+				lis[i].onclick=function(){
+//					console.log(this.index);
+				}
+			}
+			//使用闭包实现li的索引号
+			for(var i=0;i<lis.length;i++){
+				//立即执行函数,也称为小闭包
+				(function(i){
+					lis[i].onclick=function(){
+						console.log(i);
+					}
+//					console.log(i);
+				})(i);
+			}
+			//定时器中的闭包
+			for(var i=0;i<lis.length;i++){
+				//立即执行函数,也称为小闭包
+				(function(i){
+					setTimeout(function(){
+						console.log(lis[i].innerHTML);
+					},3000);
+				})(i);
+			}
+		</script>
+	</body>
+</html>
