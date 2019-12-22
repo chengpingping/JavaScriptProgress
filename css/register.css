@@ -1,0 +1,27 @@
+body{
+	width: 100%;
+	height: 100%;
+}
+form{
+	width: 50%;
+	height: 50%;
+	position: relative;
+	margin: auto;
+	border: 1px solid black;
+}
+input{
+	position: relative;
+	margin: 15px;
+}
+.protocol_prompt{
+	
+}
+.btn{
+	
+}
+.right{
+	color: greenyellow;
+}
+.wrong{
+	color: red;
+}

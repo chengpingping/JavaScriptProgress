@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.right{
+				color:green;
+			}
+			.wrong{
+				color:red
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" class="uname" /><span class="msg">请输入用户名</span>
+		<script>
+			var reg=/^[a-zA-Z0-9_-]{6,16}$/;//注意不要由空格
+			var uname=document.querySelector('.uname');
+			var msg=document.querySelector('.msg');
+			uname.onblur=function(){
+				if(uname.value==''){
+					msg.innerHTML='请输入用户名';
+					msg.className='msg';
+					return;
+				}
+				if(reg.test(uname.value)){
+					msg.innerHTML='验证成功！';
+					msg.className='msg right';
+				}else{
+					msg.innerHTML='验证失败，请输入6-16为以字母、数字、-和_的组合！'
+					msg.className='msg wrong';
+				}
+				console.log(reg.test(uname.value));	
+			}
+			
+		</script>
+	</body>
+</html>
